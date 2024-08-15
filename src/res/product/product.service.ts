@@ -182,7 +182,6 @@ export class ProductService {
   async updateProduct(id: string, data: UpdateProductDto, brand_id: string) {
     const { images, ...updateData } = data;
   
-    // Find the product without loading images
     const product = await this.productRepository.findOne({
       where: { id, brand_id },
     });
@@ -191,21 +190,16 @@ export class ProductService {
       throw new NotFoundException(`Product with ID ${id} not found`);
     }
   
-    // Check for title uniqueness if provided
     if (data?.title) {
       await this.findUnique(data?.title);
     }
   
-    // Remove existing images
     await this.productImageRepository.delete({ product: product });
   
-    // Merge update data with existing product data
     Object.assign(product, updateData);
   
-    // Save the updated product first
     const updatedProduct = await this.productRepository.save(product);
   
-    // Handle product images
     if (images && images.length > 0) {
       const productImages = images.map((imageUrl) => {
         const productImage = new ImageEntity();
@@ -214,10 +208,8 @@ export class ProductService {
         return productImage;
       });
   
-      // Save all new images
       await this.productImageRepository.save(productImages);
   
-      // Update product's images after saving
       updatedProduct.images = productImages;
       await this.productRepository.save(updatedProduct);
     }
