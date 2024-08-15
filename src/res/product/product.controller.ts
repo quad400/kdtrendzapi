@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -51,5 +52,12 @@ export class ProductController {
     return Response.success(
       await this.productService.updateProduct(id, updateProductDto, brandId),
     );
+  }
+
+  @Delete(':id')
+  @UseGuards(BrandGuard)
+  async deleteProduct(@Param('id') id: string, @UseBrand() brandId: string) {
+    await this.productService.deleteProduct(id, brandId);
+    return Response.success(null, 'Successfully deleted product');
   }
 }

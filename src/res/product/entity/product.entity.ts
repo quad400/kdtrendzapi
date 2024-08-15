@@ -15,6 +15,7 @@ import { ImageEntity } from './image.entity';
 import { BrandEntity } from 'src/res/brand/entities/brand.entity';
 import { ColorEntity } from 'src/res/color/entities/color.entity';
 import { SizeEntity } from 'src/res/size/entities/size.entity';
+import { CartItemEntity } from 'src/res/cart/entity/cart_item.entity';
 
 @Entity('products')
 export class ProductEntity extends BaseEntity {
@@ -56,4 +57,8 @@ export class ProductEntity extends BaseEntity {
   @ManyToOne(()=> BrandEntity, (brand)=> brand.products, {onDelete:"CASCADE"})
   @JoinColumn({name: "brand_id"})
   brand: BrandEntity
+
+  @OneToMany(() => CartItemEntity, (cartItem) => cartItem.product)
+  cartItems: CartItemEntity[];
+
 }

@@ -203,8 +203,8 @@ export class ProductService {
     if (images && images.length > 0) {
       const productImages = images.map((imageUrl) => {
         const productImage = new ImageEntity();
-        // productImage.url = imageUrl;
-        // productImage.product = updatedProduct;
+        productImage.url = imageUrl;
+        productImage.product_id = updatedProduct.id;
         return productImage;
       });
   
@@ -215,6 +215,18 @@ export class ProductService {
     }
   
     return updatedProduct;
+  }
+
+  async deleteProduct(id: string, brand_id: string) {
+    const product = await this.productRepository.findOne({
+      where: { id, brand_id },
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Product with ID ${id} not found`);
+    }
+
+    await this.productRepository.remove(product);
   }
   
 }

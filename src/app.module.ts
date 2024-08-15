@@ -4,8 +4,6 @@ import { dataSourceOptions } from './lib/db/data-source';
 import { UserModule } from './res/user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthenticationModule } from './res/authentication/authentication.module';
-import { MailerModule } from '@nestjs-modules/mailer';
-import { JwtModule } from '@nestjs/jwt';
 import { UploadModule } from './res/upload/upload.module';
 import { CategoryModule } from './res/category/category.module';
 import { SizeModule } from './res/size/size.module';
@@ -13,6 +11,8 @@ import { ColorModule } from './res/color/color.module';
 import { BrandModule } from './res/brand/brand.module';
 import { CloudinaryConfigService } from './lib/config/cloudinary.config';
 import { ProductModule } from './res/product/product.module';
+import { CartModule } from './res/cart/cart.module';
+import { OrderModule } from './res/order/order.module';
 
 
 @Module({
@@ -26,7 +26,9 @@ import { ProductModule } from './res/product/product.module';
     SizeModule,
     ColorModule,
     BrandModule,
-    ProductModule
+    ProductModule,
+    CartModule,
+    OrderModule
   ],
   providers: [CloudinaryConfigService]
 })

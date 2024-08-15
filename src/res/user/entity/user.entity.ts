@@ -1,9 +1,11 @@
 import { AccountType, RolesEnum } from 'src/lib/common/enum/user.enum';
 import { BrandEntity } from 'src/res/brand/entities/brand.entity';
+import { CartEntity } from 'src/res/cart/entity/cart.entity';
 import {
   BaseEntity,
   Column,
   Entity,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -53,4 +55,7 @@ export class UserEntity extends BaseEntity {
 
   @OneToOne(() => BrandEntity, (brand) => brand.user)
   brand: BrandEntity;
+
+  @OneToMany(()=> CartEntity, (cart)=> cart.user)
+  carts: CartEntity[]
 }
