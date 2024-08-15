@@ -26,6 +26,7 @@ export class BrandGuard implements CanActivate {
         'Permission denied, Your account type is not a seller account',
       );
     }
+    request["brand"] = brandOwner.id
     return !!brandOwner;
   }
 }

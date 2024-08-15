@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateSizeDto } from './dto/create-size.dto';
 import { UpdateSizeDto } from './dto/update-size.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,9 +16,10 @@ export class SizeService {
     private sizeRepository: Repository<SizeEntity>,
   ) {}
 
-  create(createSizeDto: CreateSizeDto) {
-    const color = this.sizeRepository.create(createSizeDto);
-    return color;
+  async create(createSizeDto: CreateSizeDto) {
+    await this.findUnique(createSizeDto.name);
+    let color = this.sizeRepository.create(createSizeDto);
+    return await this.sizeRepository.save(color);
   }
 
   async findAll() {
@@ -22,23 +27,36 @@ export class SizeService {
   }
 
   async findOne(id: string) {
-    const color = await this.sizeRepository.findOneBy({ id });
-    if (!color) {
-      throw new NotFoundException('Color not found');
+    const size = await this.sizeRepository.findOneBy({ id });
+    if (!size) {
+      throw new NotFoundException('Size not found');
     }
 
-    return color;
+    return size;
   }
 
   async update(id: string, updateSizeDto: UpdateSizeDto) {
-    const color = await this.findOne(id);
+    const size = await this.findOne(id);
 
-    Object.assign(color, updateSizeDto);
-    return color;
+    await this.findUnique(updateSizeDto.name);
+    const setSize = Object.assign(size, updateSizeDto);
+    return await this.sizeRepository.save(setSize);
+  }
+
+  async findUnique(name: string) {
+    const isExist = await this.sizeRepository.findOneBy({
+      name,
+    });
+    if (isExist) {
+      throw new ConflictException(`Size name  "${name}" already exists`);
+    }
   }
 
   async remove(id: string) {
-    const color = await this.findOne(id);
-    await this.sizeRepository.delete(color);
+    const result = await this.sizeRepository.delete(id);
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`Size with ID ${id} not found`);
+    }
   }
 }

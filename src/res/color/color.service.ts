@@ -28,7 +28,6 @@ export class ColorService {
 
   async findOne(id: string) {
     const color = await this.colorRepository.findOneBy({ id });
-    console.log(color)
     if (!color) {
       throw new NotFoundException('Color not found');
     }
@@ -53,7 +52,10 @@ export class ColorService {
   }
 
   async remove(id: string) {
-    const color = await this.findOne(id);
-    return await this.colorRepository.delete(color);
+    const result = await this.colorRepository.delete(id);
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`Color with ID ${id} not found`);
+    }
   }
 }

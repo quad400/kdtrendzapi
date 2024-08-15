@@ -12,6 +12,7 @@ import { SizeModule } from './res/size/size.module';
 import { ColorModule } from './res/color/color.module';
 import { BrandModule } from './res/brand/brand.module';
 import { CloudinaryConfigService } from './lib/config/cloudinary.config';
+import { ProductModule } from './res/product/product.module';
 
 
 @Module({
@@ -20,12 +21,12 @@ import { CloudinaryConfigService } from './lib/config/cloudinary.config';
     ConfigModule.forRoot(),
     UserModule,
     AuthenticationModule,
-    // MailerModule,
     UploadModule,
     CategoryModule,
     SizeModule,
     ColorModule,
-    BrandModule
+    BrandModule,
+    ProductModule
   ],
   providers: [CloudinaryConfigService]
 })

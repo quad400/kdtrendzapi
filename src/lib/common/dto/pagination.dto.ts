@@ -4,6 +4,7 @@ import {
   IsEnum,
   IsInt,
   IsOptional,
+  IsString,
   Min,
 } from 'class-validator';
 import { Order } from '../enum/order.enum';
@@ -38,6 +39,8 @@ export class PageMetaDto {
   }
 }
 
+
+
 export class PageOptionsDto {
   @IsEnum(Order)
   @IsOptional()
@@ -54,6 +57,22 @@ export class PageOptionsDto {
   @IsOptional()
   @Type(() => Number) // Ensures the transformation of string to number
   limit?: number = 10;
+
+  @IsString()
+  @IsOptional()
+  search?: string
+  
+  @IsString()
+  @IsOptional()
+  category?: string;
+  
+  @IsString()
+  @IsOptional()
+  size?: string;
+  
+  @IsString()
+  @IsOptional()
+  color?: string;
 }
 
 export interface PageMetaDtoParameters {

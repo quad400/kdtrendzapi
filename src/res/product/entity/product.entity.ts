@@ -3,6 +3,7 @@ import { CategoryEntity } from 'src/res/category/entities/category.entity';
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   ManyToOne,
@@ -49,6 +50,10 @@ export class ProductEntity extends BaseEntity {
   @JoinTable()
   sizes: SizeEntity[];
 
-  @ManyToOne(()=> BrandEntity, (brand)=> brand.products)
+  @Column({name: "brand_id", nullable: false})
+  brand_id: string
+
+  @ManyToOne(()=> BrandEntity, (brand)=> brand.products, {onDelete:"CASCADE"})
+  @JoinColumn({name: "brand_id"})
   brand: BrandEntity
 }

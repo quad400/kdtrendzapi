@@ -26,33 +26,31 @@ export class SizeController {
   @UseGuards(RoleGuard)
   @Roles(RolesEnum.ADMIN)
   async create(@Body() createColorDto: CreateSizeDto) {
-    return Response.success(this.sizeService.create(createColorDto));
+    return Response.success(await this.sizeService.create(createColorDto));
   }
-  
+
   @Get()
   async findAll() {
-    return await this.sizeService.findAll();
+    return Response.success(await this.sizeService.findAll());
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return Response.success(await this.sizeService.findOne(id));
   }
-  
+
   @Patch(':id')
   @UseGuards(RoleGuard)
   @Roles(RolesEnum.ADMIN)
-  async update(
-    @Param('id') id: string,
-    @Body() updateColorDto: UpdateSizeDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateColorDto: UpdateSizeDto) {
     return Response.success(await this.sizeService.update(id, updateColorDto));
   }
-  
+
   @Delete(':id')
   @UseGuards(RoleGuard)
   @Roles(RolesEnum.ADMIN)
   async remove(@Param('id') id: string) {
-    return Response.success(this.sizeService.remove(id));
+    await this.sizeService.remove(id);
+    return Response.success(null, 'Size successfully deleted');
   }
 }
