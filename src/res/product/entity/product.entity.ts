@@ -8,7 +8,6 @@ import {
   ManyToMany,
   ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ImageEntity } from './image.entity';
@@ -16,6 +15,7 @@ import { BrandEntity } from 'src/res/brand/entities/brand.entity';
 import { ColorEntity } from 'src/res/color/entities/color.entity';
 import { SizeEntity } from 'src/res/size/entities/size.entity';
 import { CartItemEntity } from 'src/res/cart/entity/cart_item.entity';
+import { OrderItemEntity } from 'src/res/order/entity/order_item.entity';
 
 @Entity('products')
 export class ProductEntity extends BaseEntity {
@@ -59,6 +59,9 @@ export class ProductEntity extends BaseEntity {
   brand: BrandEntity
 
   @OneToMany(() => CartItemEntity, (cartItem) => cartItem.product)
-  cartItems: CartItemEntity[];
+  cartItems: CartItemEntity[];  
+
+  @OneToMany(() => OrderItemEntity, (orderItem) => orderItem.product)
+  orderItems: OrderItemEntity[];
 
 }

@@ -1,6 +1,7 @@
 import { AccountType, RolesEnum } from 'src/lib/common/enum/user.enum';
 import { BrandEntity } from 'src/res/brand/entities/brand.entity';
 import { CartEntity } from 'src/res/cart/entity/cart.entity';
+import { OrderEntity } from 'src/res/order/entity/order.entity';
 import {
   BaseEntity,
   Column,
@@ -58,4 +59,7 @@ export class UserEntity extends BaseEntity {
 
   @OneToMany(()=> CartEntity, (cart)=> cart.user)
   carts: CartEntity[]
+
+  @OneToMany(()=> OrderEntity, (order)=> order.user)
+  orders: OrderEntity[]
 }

@@ -9,6 +9,7 @@ import {
 } from 'class-validator';
 import { Order } from '../enum/order.enum';
 import { Type } from 'class-transformer';
+import { OrderStatus } from 'src/res/order/entity/order.entity';
 
 export class PageMetaDto {
   @IsInt()
@@ -73,6 +74,11 @@ export class PageOptionsDto {
   @IsString()
   @IsOptional()
   color?: string;
+  
+  @IsEnum(OrderStatus)
+  @IsOptional()
+  status?: OrderStatus;
+
 }
 
 export interface PageMetaDtoParameters {

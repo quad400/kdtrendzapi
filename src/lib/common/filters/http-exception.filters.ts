@@ -27,8 +27,6 @@ export class ExceptionsFilter implements ExceptionFilter {
 
     switch (true) {
       case exception instanceof ValidationException: {
-
-
         const exceptionResponse = exception.getResponse();
         
         console.log(exceptionResponse)
