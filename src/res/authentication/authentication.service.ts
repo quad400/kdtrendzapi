@@ -6,6 +6,7 @@ import {
   FogotPasswordDto,
   LoginAccountDto,
   RegisterAccountDto,
+  ResetPasswordDto,
   VerifyAccountDto,
 } from './dto/authentication.dto';
 import { hash, genSalt, compare } from 'bcrypt';
@@ -81,10 +82,10 @@ export class AuthenticationService {
     );
   }
 
-  async resetPassword(data: any, payload: UserEntity) {
-    const user = await this.findByIdWithPassword(payload.email);
+  async resetPassword(data: ResetPasswordDto, userId: string) {
+    const user = await this.findById(userId);
 
-    if (data.password !== data.confirmPassword) {
+    if (data.password !== data.confirm_password) {
       return Response.error('Password do not match', HttpStatus.BAD_REQUEST);
     }
 
@@ -128,6 +129,12 @@ export class AuthenticationService {
       'Account verified successfully',
       HttpStatus.OK,
     );
+  }
+
+  async findById(userId: string) {
+    const user = await this.userRepository.findOneBy({ id: userId });
+    if (!user) throw new BadRequestException('User not found');
+    return user;
   }
 
   async findByIdWithPassword(email: string): Promise<UserEntity> {

@@ -41,8 +41,7 @@ export class ExceptionsFilter implements ExceptionFilter {
         }
         const responseBody = {
           success: false,
-          message: errorMessage,
-          statusCode: HttpStatus.BAD_REQUEST,
+          message: errorMessage
         };
         return httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
       }
@@ -50,8 +49,7 @@ export class ExceptionsFilter implements ExceptionFilter {
       default: {
         const responseBody = {
           success: false,
-          message: exception.message,
-          stack: exception.stack,
+          message: exception.message
         };
         httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
       }

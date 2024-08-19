@@ -24,21 +24,25 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('me')
-  async me(@User() user: UserEntity) {
-    return Response.success(user);
+  async me(@User() userId: string) {
+    return Response.success(await this.userService.findById(userId));
   }
 
   @Patch('me')
-  async updateUserAccount(
-    @Body() data: UpdateUserDto,
-    @User() userId: string,
-  ) {
-    return await this.userService.updateUserAccount(data, userId);
+  async updateUserAccount(@Body() data: UpdateUserDto, @User() userId: string) {
+    return Response.success(
+      await this.userService.updateUserAccount(data, userId),
+    );
   }
-  
-  @Delete("me")
-  async deleteUserAccount(@User() userId: string){
-    return await this.userService.deleteUserAccount(userId)
+
+  @Delete('me')
+  async deleteUserAccount(@User() userId: string) {
+    return await this.userService.deleteUserAccount(userId);
+  }
+
+  @Patch(':userId')
+  async makeAdmin(@Body() data: string[], @Param("userId") userId: string) {
+    return Response.success(await this.userService.makeAdmin(data, userId));
   }
   
   @Post(':id/block-account')

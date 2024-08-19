@@ -13,12 +13,13 @@ import { CloudinaryConfigService } from './lib/config/cloudinary.config';
 import { ProductModule } from './res/product/product.module';
 import { CartModule } from './res/cart/cart.module';
 import { OrderModule } from './res/order/order.module';
+import { PaymentModule } from './res/payment/payment.module';
 
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(dataSourceOptions),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({isGlobal: true}),
     UserModule,
     AuthenticationModule,
     UploadModule,
@@ -28,7 +29,8 @@ import { OrderModule } from './res/order/order.module';
     BrandModule,
     ProductModule,
     CartModule,
-    OrderModule
+    OrderModule,
+    PaymentModule
   ],
   providers: [CloudinaryConfigService]
 })

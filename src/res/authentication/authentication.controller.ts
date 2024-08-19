@@ -43,12 +43,12 @@ export class AuthenticationController {
   @UseGuards(AuthGuard)
   @Post('reset-password')
   async resetPassword(
-    @User() user: UserEntity,
+    @User() userId: string,
     @Body() resetPasswordDto: ResetPasswordDto,
   ) {
     return await this.authenticationService.resetPassword(
       resetPasswordDto,
-      user,
+      userId,
     );
   }
 
