@@ -94,4 +94,17 @@ export class OrderService {
     order.status = data.status as OrderStatus;;
     return this.orderRepository.save(order);
   }
+
+  async getOrder(id: string) {
+    const order = await this.orderRepository.findOne({
+      where: { id },
+      relations: ['items', 'items.product'],
+    });
+
+    if (!order) {
+      throw new NotFoundException('Order not found');
+    }
+
+    return order
+  }
 }

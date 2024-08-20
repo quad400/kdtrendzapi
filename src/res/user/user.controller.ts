@@ -41,8 +41,8 @@ export class UserController {
   }
 
   @Patch(':userId')
-  async makeAdmin(@Body() data: string[], @Param("userId") userId: string) {
-    return Response.success(await this.userService.makeAdmin(data, userId));
+  async makeAdmin(@Param("userId") userId: string) {
+    return Response.success(await this.userService.makeAdmin(userId));
   }
   
   @Post(':id/block-account')

@@ -29,7 +29,7 @@ export class BrandService {
     const user = await this.userService.findById(userId);
 
     await this.findOne(userId, createBrandDto.name);
-
+    
     const brand = this.brandRepository.create({ ...createBrandDto, user });
     return await this.brandRepository.save(brand);
   }
@@ -40,6 +40,8 @@ export class BrandService {
   ): Promise<BrandEntity> {
     const brand = await this.findBy(userId);
 
+    await this.findOne(userId, data.name);
+    
     Object.assign(brand, data);
     await this.brandRepository.save(brand);
 
@@ -80,6 +82,6 @@ export class BrandService {
     if (!brand) {
       throw new NotFoundException('Brand not found');
     }
-    return await this.brandRepository.delete(brand);
+    return await this.brandRepository.remove(brand);
   }
 }

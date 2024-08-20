@@ -151,7 +151,7 @@ export class ProductService {
   }
 
   async getProduct(id: string) {
-    const product = this.productRepository
+    const product = await this.productRepository
       .createQueryBuilder('product')
       .leftJoinAndSelect('product.category', 'category')
       .leftJoinAndSelect('product.colors', 'colors')
@@ -170,6 +170,7 @@ export class ProductService {
       ])
       .where('product.id = :id', { id })
       .getOne();
+
 
     if (!product) {
       throw new NotFoundException(`Product with ID ${id} not found`);

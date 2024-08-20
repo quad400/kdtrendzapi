@@ -4,6 +4,7 @@ import { Not, Repository } from 'typeorm';
 import { UserEntity } from './entity/user.entity';
 import { UpdateUserDto } from './dto/user.dto';
 import { Response } from 'src/lib/common/utility/response';
+import { RolesEnum } from 'src/lib/common/enum/user.enum';
 
 @Injectable()
 export class UserService {
@@ -31,13 +32,17 @@ export class UserService {
     return Response.success(null, 'Account successfully deleted');
   }
 
-  async makeAdmin(data: string[], userId: string) {
+  async makeAdmin(userId: string) {
     const user = await this.findById(userId);
 
-    console.log(data)
-    Object.assign(user, { roles: data });
-    await this.userRepository.save(user);
-    return user;
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+
+    user.roles = [RolesEnum.ADMIN];
+
+    return await this.userRepository.save(user)
+
   }
 
   async findByEmail(email: string): Promise<UserEntity> {

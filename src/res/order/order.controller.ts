@@ -32,6 +32,12 @@ export class OrderController {
     return Response.success(await this.orderService.getOrders(userId, query));
   }
 
+  @Get(':id')
+  @UseGuards(AuthGuard)
+  async getOrder(@Param('id') id: string) {
+    return Response.success(await this.orderService.getOrder(id));
+  }
+
   @Patch(':id')
   @UseGuards(AuthGuard)
   async updateOrderStatus(
