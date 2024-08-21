@@ -13,8 +13,7 @@ export const dataSourceOptions: DataSourceOptions = {
   logging: false,
   synchronize: process.env.IS_PRODUCTION === 'true',
   ssl: {
-    rejectUnauthorized: process.env.IS_PRODUCTION === 'true',
-    ca: process.env.DB_CA
+    rejectUnauthorized: process.env.IS_PRODUCTION === 'true'
   },
 };
 
