@@ -1,7 +1,5 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { config } from 'dotenv';
-import * as fs from 'fs';
-import * as path from 'path';
 
 config();
 
@@ -15,7 +13,7 @@ export const dataSourceOptions: DataSourceOptions = {
   extra: {
     trustServerCertificate: true,
   },
-  ssl: true,
+  ssl: process.env.IS_PRODUCTION === 'true',
 };
 
 
