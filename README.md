@@ -1,35 +1,66 @@
-## KDTrendz
-KDtrendz is a robust B2B e-commerce platform that facilitates seamless interactions between businesses and customers. Below is a broad breakdown of the key features and components of the project:
+# B2B E-commerce API
 
+Welcome to the B2B E-commerce API repository! This project provides a robust backend solution for a business-to-business e-commerce platform, designed to handle various aspects of e-commerce operations efficiently.
 
-### Key Features
+## 🚀 Project Overview
 
-1. Product Management
-Brands can list their products, each with detailed descriptions, images, and pricing information.
-Categories allow for organized browsing, ensuring customers can find products easily.
-Support for variant options like color and size to provide more choices to customers.
+This API serves as the backbone for a B2B e-commerce application, featuring functionalities for user management, product handling, shopping cart operations, and payment processing. It’s built using NestJS with a focus on scalability, security, and maintainability.
 
-2. Order Management
-Customers can place orders which are then tracked within the system.
-Order statuses are updated in real-time, helping both the customer and the brand to monitor progress.
+## 🔧 Key Features
 
-3. Payment Processing
-Integrated with Paystack for secure payment processing.
-Payment Splitting: Payments are automatically divided between the platform admin and brand owners based on pre-set commissions.
-Automated Payouts to brand owners, ensuring they receive their earnings promptly.
+- User Authentication: Secure user registration, login, and profile management.
+- Shopping Cart: Add, remove, and update items in the shopping cart.
+- Product Management: CRUD operations for products and categories.
+- Order Processing: Handle orders and track order statuses.
+- Payment Integration: Integration with payment gateways (e.g., Paystack) for seamless transactions.
+- Role-Based Access Control: Different access levels based on user roles.
 
-4. Bank Account Verification
-Brands can link their bank accounts, which are verified using Paystack to ensure authenticity and prevent errors.
+## 📚 API Documentation
 
-5. Webhooks for Real-time Updates
-The platform listens for payment success events via Paystack Webhooks to update order statuses automatically.
+The API is documented using Postman. You can explore and test the API endpoints using the following link:
 
-## Tech Stack
-- Backend: NestJS, TypeORM, PostgreSQL
-- Payment Integration: Paystack API
-- Authentication: JWT
-- Deployment: Azure/AWS
+https://documenter.getpostman.com/view/34498096/2sAXjDfbRE
 
-KDtrends aims to provide a streamlined, reliable, and secure platform for businesses to manage their e-commerce needs efficiently.
+🛠️ Technologies Used
 
+- NestJS: A progressive Node.js framework for building efficient and scalable server-side applications.
+- TypeORM: ORM for TypeScript and JavaScript that supports various databases.
+- PostgreSQL: Relational database management system.
+- Paystack: Payment gateway integration for handling transactions.
 
+## 💡 Setup and Installation
+
+1. Clone the Repository
+
+```sh
+git clone https://github.com/yourusername/your-repository.git
+cd your-repository
+```
+
+2. Install Dependencies:
+
+```sh
+npm install
+```
+
+3. Generate Migrations
+
+```sh
+npm run migration:generate -- src/lib/db/migrations/{name}
+mpn run migration:run
+```
+
+4. Run Application
+
+```sh
+npm run start:dev
+```
+
+## 🔒 Contributing
+Contributions are welcome! If you find any issues or have suggestions, please open an issue or submit a pull request.
+
+## 📧 Contact
+For any questions or further information, feel free to reach out:
+
+- Email: adedijiabdulquadri@gmail.com
+- LinkedIn: https://www.linkedin.com/in/abdulquadri-adediji-161925209/
