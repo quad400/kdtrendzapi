@@ -12,10 +12,12 @@ export const dataSourceOptions: DataSourceOptions = {
   migrations: ['dist/lib/db/migrations/*{.ts,.js}'],
   logging: false,
   synchronize: process.env.IS_PRODUCTION === 'true',
-  ssl: {
-    rejectUnauthorized: process.env.IS_PRODUCTION === 'true'
+  extra: {
+    trustServerCertificate: true,
   },
+  ssl: true,
 };
+
 
 const dataSource = new DataSource(dataSourceOptions);
 
